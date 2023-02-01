@@ -2,7 +2,7 @@ const pollTitle = document.getElementById('poll__title');
 const pollAnswers = document.getElementById('poll__answers');
 
 const xhr = new XMLHttpRequest();
-xhr.open('GET', 'https://netology-slow-rest.herokuapp.com/poll.php');
+xhr.open('GET', 'https://students.netoservices.ru/nestjs-backend/poll');
 xhr.send();
 
 xhr.addEventListener('readystatechange', function () {
@@ -28,7 +28,7 @@ xhr.addEventListener('readystatechange', function () {
                 alert('Спасибо, ваш голос засчитан!');
 
                 const xhr2 = new XMLHttpRequest();
-                xhr2.open('POST', 'https://netology-slow-rest.herokuapp.com/poll.php');
+                xhr2.open('POST', 'https://students.netoservices.ru/nestjs-backend/poll');
                 xhr2.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
                 xhr2.send(`vote=${idPoll}&answer=${number}`);
                 
