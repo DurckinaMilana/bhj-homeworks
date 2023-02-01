@@ -18,6 +18,6 @@ xhr.addEventListener('readystatechange', () => {
     }
 });
 
-xhr.open('GET', 'https://netology-slow-rest.herokuapp.com');
+xhr.open('GET', ' https://students.netoservices.ru/nestjs-backend/slow-get-courses');
 
 xhr.send();
