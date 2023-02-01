@@ -1,56 +1,22 @@
-const slides = document.getElementsByClassName("slider__item");
-const prevButton = document.querySelector(".slider__arrow_prev");
-const nextButton = document.querySelector(".slider__arrow_next");
-const dots = document.getElementsByClassName("slider__dot");
+const arrowPrev = document.querySelector('.slider__arrow_prev');
+const arrowNext = document.querySelector('.slider__arrow_next');
+const slides = Array.from(document.querySelectorAll('.slider__item'));
+const getCurrIndex = () => {
+    return slides.findIndex((el) => {
+        return el.classList.contains('slider__item_active')
+    });
+};
 
-let arrLinks = Array.from(slides);
-let number = 0;
+arrowNext.addEventListener('click', () => {
+    let currIndex = getCurrIndex();
+    let nextIndex = currIndex === slides.length - 1 ? 0 : currIndex + 1;
+    slides[currIndex].classList.remove('slider__item_active');
+    slides[nextIndex].classList.add('slider__item_active');
+});
 
-function deactivateSlide(number) {
-    slides.item(number).className = "slider__item";
-    dots.item(number).className = "slider__dot";
-}
-
-function activateSlide (number) {
-    slides.item(number).className = "slider__item slider__item_active";
-    dots.item(number).className = "slider__dot slider__dot_active";
-}
-
-prevButton.onclick = leafLeft;
-function leafLeft() {
-    let number = arrLinks.findIndex((element) => element.className === "slider__item slider__item_active");
-    deactivateSlide(number);
-    if (number === 0) {
-        number = slides.length - 1;
-        activateSlide (number);
-    } else {
-        number -= 1;
-        activateSlide (number);
-    }
-}
-
-nextButton.onclick = leafRight;
-function leafRight() {
-    let number = arrLinks.findIndex((element) => element.className === "slider__item slider__item_active");
-    deactivateSlide(number);
-    if (number === (slides.length - 1)) {
-        number = 0;
-        activateSlide (number);
-    } else {
-        number += 1;
-        activateSlide (number);
-    }
-}
-
-
-for (i = 0; i < dots.length; i++) {
-    dot = dots.item(i);
-    let numberDot = i;
-    dot.onclick = leafDots;
-
-    function leafDots() {
-        let number = arrLinks.findIndex((element) => element.className === "slider__item slider__item_active");
-        deactivateSlide(number);
-        activateSlide(numberDot);
-    }
-}
+arrowPrev.addEventListener('click', () => {
+    let currIndex = getCurrIndex();
+    let prevIndex = currIndex === 0 ? slides.length - 1 : currIndex - 1;
+    slides[currIndex].classList.remove('slider__item_active');
+    slides[prevIndex].classList.add('slider__item_active');
+});
